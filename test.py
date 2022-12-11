@@ -1,12 +1,24 @@
-import skimage
-from skimage import io, segmentation
 
-# Load the image
-image = io.imread("image.jpg")
+def howManyGames(p, d, m, s):
+    # Return the number of games you can buy
+    
+    cost = p
+    bought = 0
+    debug = []
+    while s - cost > 0:
 
-# Perform image segmentation
-segments = segmentation.slic(image, n_segments=100, compactness=10, sigma=1)
+        s -= cost
+        bought += 1
 
-# Display the segmented image
-io.imshow(segments)
-io.show()
+
+        print(cost, s)
+        if s - cost - d <= m:
+            cost = m
+        else:
+            cost -= d
+        
+    
+    return bought
+
+
+print(howManyGames(20 ,3 ,6,85))
